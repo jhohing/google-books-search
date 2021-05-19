@@ -1,22 +1,29 @@
-import React from "react";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Saved from "./pages/Saved";
+import Search from "./pages/Search";
 import Nav from "./components/Nav";
-import { BrowserRouter } from "react-router-dom";
+import { Container} from "./components/Grid";
+import './App.css';
 
-// The app will not render correctly until you setup a Route component.
-// Refer to the Basic Example documentation if you need to.
-// (https://reacttraining.com/react-router/web/example/basic)
-function App() {
-  return (
-    <BrowserRouter>
-    <div>
-      <Nav />
-      <Books />
-    </div>
-    </BrowserRouter>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Nav/>
+        <Router>
+          <Container>
+            <Switch>
+              <Route exact path="/" component={Search} />
+              <Route path="/bookshelf" component={Saved} />
+              <Route exact path="/books/:id" component={null} />
+              <Route component={null} />
+            </Switch>
+          </Container>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
